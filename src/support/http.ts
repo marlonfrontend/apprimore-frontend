@@ -6,6 +6,8 @@ export const http: AxiosInstance = axios.create({
 
 http.interceptors.request.use(
   (config) => {
+    config.headers['domain'] = 'localhost'
+
     return config
   },
   (error) => Promise.reject(error),

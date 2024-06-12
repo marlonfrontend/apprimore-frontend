@@ -1,5 +1,7 @@
+import { SegmentSelector } from '@/components'
+
 const Home = () => {
-  return <main>example</main>
+  return <SegmentSelector />
 }
 
 export default Home
