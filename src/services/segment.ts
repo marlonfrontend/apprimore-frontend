@@ -1,6 +1,6 @@
 import { http } from '@/support'
-import { Segment, SegmentOutput } from '@/types'
+import { SegmentInput, SegmentOutput } from '@/types'
 
-export const getSegment = (params: Segment): Promise<SegmentOutput> => {
+export const getSegment = (params: SegmentInput): Promise<SegmentOutput> => {
   return http.get('/Segmento', { params })
 }

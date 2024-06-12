@@ -3,18 +3,17 @@
 import { useState, useEffect, ChangeEvent } from 'react'
 import { CheckIcon, ChevronLeft, EditIcon, SearchIcon } from 'lucide-react'
 import {
-  TextField,
-  IconButton,
-  Button,
   Box,
+  Button,
+  IconButton,
+  Container,
   Typography,
   ListItem,
   ListItemButton,
   ListItemText,
   List,
-  Container,
-  InputAdornment,
-} from '@mui/material'
+  Input,
+} from '@/components'
 import { getSegment } from '@/services'
 import { SegmentProps } from './SegmentSelector.types'
 
@@ -27,7 +26,7 @@ export const SegmentSelector = () => {
     descricao: 'Serviço de Beleza',
   })
 
-  const fetchSegments = async (descricao: SegmentProps['descricao']) => {
+  const fetchSegments = async (descricao: string) => {
     try {
       const response = await getSegment({ descricao })
       setSegments(response.list)
@@ -79,17 +78,11 @@ export const SegmentSelector = () => {
           {edit ? (
             <Box>
               <Box display="flex" justifyContent="center" alignItems="center">
-                <TextField
+                <Input
                   value={search}
                   onChange={handleInputChange}
                   placeholder="Ex. Restaurante"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <SearchIcon />
-                      </InputAdornment>
-                    ),
-                  }}
+                  endIcon={<SearchIcon />}
                   sx={{ width: '100%' }}
                 />
               </Box>
