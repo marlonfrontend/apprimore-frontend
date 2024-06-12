@@ -14,4 +14,4 @@ pnpm dev
 bun dev
 ```
 
-abrir em demonstração [Teste](https://apprimore-frontend-odsldiebl-marlonfrontends-projects.vercel.app/)
+Preview: [Teste](https://apprimore-frontend-odsldiebl-marlonfrontends-projects.vercel.app/)
