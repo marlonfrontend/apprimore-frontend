@@ -1,4 +1,4 @@
-import { Provider } from '@/components'
+import { DefaultLayout } from '@/layouts'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ const RootLayout = ({
   return (
     <html lang="en">
       <body>
-        <Provider>{children}</Provider>
+        <DefaultLayout>{children}</DefaultLayout>
       </body>
     </html>
   )

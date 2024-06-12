@@ -54,7 +54,7 @@ export const SegmentSelector = () => {
 
   return (
     <>
-      <Container>
+      <Container maxWidth="md">
         <Box padding={4}>
           <Typography
             align="center"
@@ -98,10 +98,13 @@ export const SegmentSelector = () => {
             </Box>
           ) : (
             <Box justifyContent="center">
-              <Typography align="center" fontWeight={500}>
-                Segmento Selecionado:
-              </Typography>
-              <Box display="flex" justifyContent="center" alignItems="center">
+              <Typography align="center">Segmento Selecionado:</Typography>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                gap={2}
+              >
                 <Typography
                   align="center"
                   color="primary"
@@ -124,7 +127,12 @@ export const SegmentSelector = () => {
         position="fixed"
         bottom="0"
         padding={4}
-        sx={{ borderTop: 1, borderColor: '#ddd', width: '100%' }}
+        sx={{
+          borderTop: 1,
+          borderColor: '#ddd',
+          width: '100%',
+          backgroundColor: '#fff',
+        }}
       >
         <Button size="large">Voltar</Button>
         <Button
