@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, ChangeEvent } from 'react'
+import { CheckIcon, ChevronLeft, EditIcon, SearchIcon } from 'lucide-react'
 import {
   TextField,
   IconButton,
@@ -12,10 +13,10 @@ import {
   ListItemText,
   List,
   Container,
+  InputAdornment,
 } from '@mui/material'
-import { SegmentProps } from './SegmentSelector.types'
 import { getSegment } from '@/services'
-import { CheckIcon, ChevronLeft, EditIcon } from 'lucide-react'
+import { SegmentProps } from './SegmentSelector.types'
 
 export const SegmentSelector = () => {
   const [edit, setEdit] = useState<boolean>(false)
@@ -26,7 +27,7 @@ export const SegmentSelector = () => {
     descricao: 'Serviço de Beleza',
   })
 
-  const fetchSegments = async (descricao: string) => {
+  const fetchSegments = async (descricao: SegmentProps['descricao']) => {
     try {
       const response = await getSegment({ descricao })
       setSegments(response.list)
@@ -68,7 +69,7 @@ export const SegmentSelector = () => {
           >
             Segmento da Empresa
           </Typography>
-          <Typography align="center">
+          <Typography align="center" fontSize={18}>
             Confirme o segmento que sua empresa atua para personalizarmos sua
             experiência em nosso aplicativo.
           </Typography>
@@ -81,12 +82,25 @@ export const SegmentSelector = () => {
                 <TextField
                   value={search}
                   onChange={handleInputChange}
-                  placeholder="Buscar segmento"
+                  placeholder="Ex. Restaurante"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                   sx={{ width: '100%' }}
                 />
               </Box>
 
-              <List>
+              <List
+                sx={{
+                  maxHeight: '300px',
+                  overflowY: 'scroll',
+                  backgroundColor: '#f9f9f9',
+                }}
+              >
                 {segments.map((segment) => (
                   <ListItem component="div" disablePadding key={segment.id}>
                     <ListItemButton
@@ -96,6 +110,15 @@ export const SegmentSelector = () => {
                     </ListItemButton>
                   </ListItem>
                 ))}
+                {segments.length === 0 && (
+                  <ListItem component="div" disablePadding>
+                    <ListItem>
+                      <ListItemText>
+                        Informe acima o segmento para continuar.
+                      </ListItemText>
+                    </ListItem>
+                  </ListItem>
+                )}
               </List>
             </Box>
           ) : (
