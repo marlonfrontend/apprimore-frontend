@@ -1,4 +1,3 @@
-export type Segment = {
-  id: string
-  descricao: string
-}
+import { Segment } from '@/types'
+
+export type SegmentProps = {} & Segment

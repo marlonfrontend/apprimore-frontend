@@ -3,6 +3,7 @@
 import { useState, useEffect, ChangeEvent } from 'react'
 import {
   TextField,
+  IconButton,
   Button,
   Box,
   Typography,
@@ -12,23 +13,18 @@ import {
   List,
   Container,
 } from '@mui/material'
-import { Segment } from './SegmentSelector.types'
+import { SegmentProps } from './SegmentSelector.types'
 import { getSegment } from '@/services'
+import { CheckIcon, ChevronLeft, EditIcon } from 'lucide-react'
 
 export const SegmentSelector = () => {
   const [edit, setEdit] = useState<boolean>(false)
   const [search, setSearch] = useState<string>('')
-  const [segments, setSegments] = useState<Segment[]>([])
-  const [selectedSegment, setSelectedSegment] = useState<Segment>({
+  const [segments, setSegments] = useState<SegmentProps[]>([])
+  const [selectedSegment, setSelectedSegment] = useState<SegmentProps>({
     id: '',
     descricao: 'Serviço de Beleza',
   })
-
-  useEffect(() => {
-    if (search) {
-      fetchSegments(search)
-    }
-  }, [search])
 
   const fetchSegments = async (descricao: string) => {
     try {
@@ -43,7 +39,7 @@ export const SegmentSelector = () => {
     setEdit(true)
   }
 
-  const handleSegmentSelect = (segment: Segment) => {
+  const handleSegmentSelect = (segment: SegmentProps) => {
     setSelectedSegment(segment)
     setEdit(false)
   }
@@ -51,6 +47,12 @@ export const SegmentSelector = () => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value)
   }
+
+  useEffect(() => {
+    if (search) {
+      fetchSegments(search)
+    }
+  }, [search])
 
   return (
     <>
@@ -114,7 +116,9 @@ export const SegmentSelector = () => {
                 >
                   {selectedSegment.descricao}
                 </Typography>
-                <Button onClick={handleEditClick}>Editar</Button>
+                <IconButton color="primary" onClick={handleEditClick}>
+                  <EditIcon />
+                </IconButton>
               </Box>
             </Box>
           )}
@@ -134,9 +138,12 @@ export const SegmentSelector = () => {
           backgroundColor: '#fff',
         }}
       >
-        <Button size="large">Voltar</Button>
+        <Button startIcon={<ChevronLeft />} size="large">
+          Voltar
+        </Button>
         <Button
           color="primary"
+          startIcon={<CheckIcon />}
           variant="contained"
           disableElevation
           size="large"
